@@ -1,6 +1,4 @@
 import requests
-from xml.etree import ElementTree as ET
-import boto3
 
 FEED_URL_AWS = "https://status.aws.amazon.com/rss/all.rss"
 FEED_URL_AZURE = "https://azure.status.microsoft/en-in/status/feed/"
@@ -10,11 +8,11 @@ CURRENT_FEED_FILE_AWS = "/tmp/current_aws.txt"
 UPDATED_FEED_FILE_AWS = "/tmp/updated_aws.txt"
 CURRENT_FEED_FILE_AZURE = "/tmp/current_azure.txt"
 UPDATED_FEED_FILE_AZURE = "/tmp/updated_azure.txt"
-SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:149536489917:rss-update"
-
 status_page_aws = "https://health.aws.amazon.com/health/status"
 status_page_azure = "https://azure.status.microsoft/en-in/status"
 
+
+# Function to fetch content from the cloud's RSS feed status page
 def fetch(feed_url):
     try:
         response = requests.get(feed_url)
@@ -31,14 +29,7 @@ def save_feed(feed, file_path):
     with open(file_path, "w") as file:
         file.write(feed)
 
-def send_sns_notification(topic_arn, subject, message):
-    try:
-        sns_client = boto3.client("sns", region_name="us-east-1")
-        sns_client.publish(TopicArn=topic_arn, Subject=subject, Message=message)
-        print("Notification sent via SNS.")
-    except Exception as e:
-        print(f"Error sending SNS notification: {e}")
-
+# Function to check for feed updates, without SNS notification
 def check(last_count, current_feed, current_feed_file, updated_feed_file, feed_name, status_page_url):
     if not current_feed:
         print("No feed fetched. Exiting.")
@@ -51,11 +42,6 @@ def check(last_count, current_feed, current_feed_file, updated_feed_file, feed_n
     if current_count != last_count:
         print("Feed has been updated!")
         save_feed(current_feed, updated_feed_file)
-        send_sns_notification(
-            SNS_TOPIC_ARN,
-            f"{feed_name} Status Page Updated",
-            f"The {feed_name} status page has been updated. Please check {status_page_url} for more details."
-        )
         return current_count
     else:
         print("No updates detected.")
