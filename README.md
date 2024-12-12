@@ -13,13 +13,17 @@ This script monitors RSS feeds for status updates from AWS and Azure and sends n
   
 
 ## Installation
-1. Can use amazon linux basic ec2 instance like type t2 micro
+1. Can use amazon linux basic ec2 instance like type t2 micro 
+
 2. Clone this repository.
 3. Install the required Python library:
    ```
    pip install requests boto3
    ```
 4. Setup cron for execution
+   sample one $ crontab -l
+               0 * * * * /usr/bin/python3 /home/ec2-user/scripts/cloud-status/status_update.py >> /home/ec2-user/scripts/cloud-status/status_update.log 2>&1
+   and logs will be availablke at  /home/ec2-user/scripts/cloud-status/status_update.log
     
 ## Configuration
 
