@@ -13,7 +13,7 @@ This script monitors RSS feeds for status updates from AWS and Azure and sends n
   
 
 ## Installation
-1. Can use amazon linux basic ec2 instance like type t2 micro 
+1. Can use amazon linux basic ec2 instance like type t2 micro / or can use lambda
 
 2. Clone this repository.
 3. Install the required Python library:
@@ -37,8 +37,8 @@ This script monitors RSS feeds for status updates from AWS and Azure and sends n
    - If the line count has changed, it saves the updated feed locally and sends a notification.
 3. **Send Notification**:
    - Sends a custom email notification via the configured SNS topic.
+     
 
-## Limitations
+## Alternative method for ec2
 
-- The script compares feeds based on line count. Minor changes (like character change) may not trigger an update, but minor changes will not occur for staus update.
-- Once notification received check cloud status page for detecting change, if needed to verify the change can refer the updated file txt present in the running instance
+The same code with minor modification can use in lambda for the same use case, and can trigger SNS for sending notifications.
