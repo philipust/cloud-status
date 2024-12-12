@@ -14,7 +14,7 @@ SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:149536489917:rss-update"
 status_page_aws = "https://health.aws.amazon.com/health/status"
 status_page_azure = "https://azure.status.microsoft/en-in/status"
 
-#function for fetching data from the clpud feed url
+# function for fetching data from the clpud feed url
 
 def fetch(feed_url):
     try:
@@ -33,7 +33,7 @@ def save_feed(feed, file_path):
         file.write(feed)
 
 
-#function to send notification via SNS realated with update
+# function to send notification via SNS realated with update
 
 def send_sns_notification(topic_arn, subject, message):
     try:
@@ -44,7 +44,7 @@ def send_sns_notification(topic_arn, subject, message):
         print(f"Error sending SNS notification: {e}")
 
 
-#function to check update in feed and added notification message
+# function to check update in feed and added notification message
 
 def check(last_count, current_feed, current_feed_file, updated_feed_file, feed_name, status_page_url, feed_url):
     if not current_feed:
@@ -68,7 +68,7 @@ The {feed_name} status page has been updated. Please check the following link fo
 An update has been detected from the status feed URL for the cloud:  {feed_url}
 
         
-Thank you.
+Thank you!
 """
         send_sns_notification(
             SNS_TOPIC_ARN, subject , message
@@ -89,7 +89,7 @@ def load(file_path):
     except FileNotFoundError:
         return 0
 
-#main blcok for executing feed check for both azure and aws
+# main blcok for executing feed check for both azure and aws
 if __name__ == "__main__":
     last_count_aws = load(LINE_COUNT_FILE_AWS)
     current_feed_aws = fetch(FEED_URL_AWS)
