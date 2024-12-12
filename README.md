@@ -13,12 +13,14 @@ This script monitors RSS feeds for status updates from AWS and Azure and sends n
   
 
 ## Installation
-1. Can use basic ec2 insace like t2 micro
-1. Clone this repository.
-2. Install the required Python library:
+1. Can use amazon linux basic ec2 instance like type t2 micro
+2. Clone this repository.
+3. Install the required Python library:
    ```
    pip install requests boto3
    ```
+4. Setup cron for execution
+    
 ## Configuration
 
 `SNS_TOPIC_ARN`: update the ARN for sns topic in the script.
