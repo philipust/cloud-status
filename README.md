@@ -42,3 +42,7 @@ This script monitors RSS feeds for status updates from AWS and Azure and sends n
 ## Alternative method for ec2
 
 The same code with minor modification can use in lambda for the same use case, and can trigger SNS for sending notifications.
+
+## Troublehsooting and logging 
+
+Fetching data are stored in /tmp location files in the same instace, if needed manual comparison for troubleshooting it can use, both current and updated feed files will be available. 
