@@ -45,4 +45,4 @@ The same code with minor modification can use in lambda for the same use case, a
 
 ## Troublehsooting and logging 
 
-Fetching data are stored in /tmp location files in the same instace, if needed manual comparison for troubleshooting it can use, both current and updated feed files will be available. 
+Fetched data is stored in the /tmp directory on the same instance. If manual comparison is needed for troubleshooting, both the current and updated feed files will be available for reference on the instance.
